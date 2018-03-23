@@ -109,4 +109,6 @@ echo "Now would be a good time to setup your Transaction ID and VOUT from your w
 sleep 3
 echo "You'll need the Masternode Key which is: $MKEY"
 sleep 3
+echo "You'll also need your server IP which is: $EXIP"
+sleep 3
 echo "Good luck! You got this!!"
