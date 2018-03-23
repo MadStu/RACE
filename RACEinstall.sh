@@ -85,7 +85,7 @@ race-cli mnsync status
 sleep 10
 echo "Waiting again..."
 sleep 4
-rm -rf $HOME/tempRACE
+sudo rm -rf $HOME/tempRACE
 race-cli mnsync status
 sleep 3 
 echo "Keep checking the masternode sync status by typing: race-cli mnsync status"
@@ -94,8 +94,11 @@ echo "When you see AssetID: 999 then you can Start Alias on your windows wallet.
 sleep 3
 echo "Now would be a good time to setup your Transaction ID and VOUT from your windows wallet"
 sleep 3
-echo "You'll need the Masternode Key which is: $MKEY"
+echo "You'll need the Masternode Key which is:"
+echo "$MKEY"
 sleep 3
-echo "You'll also need your server IP which is: $EXIP"
+echo "You'll also need your server IP which is:"
+echo "$EXIP"
 sleep 3
 echo "Good luck! You got this!!"
+rm ~/RACEinstall.sh
