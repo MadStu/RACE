@@ -82,7 +82,13 @@ sed -i -e 's/\r$//' fixsentinel.sh
 
 Now Start Alias again in the windows wallet and wait another hour or so for the status to change. 
 
-9. Running out of memory?
+
+
+PROBLEMS
+
+
+- Running out of memory?
+
 
 IF your server doesn't have enough memory, you may need to create a swapfile by pasting this command:
 
@@ -91,5 +97,25 @@ chmod 600 /swapfile
 mkswap /swapfile
 swapon /swapfile
 echo -e "/swapfile none swap sw 0 0 \n" >> /etc/fstab
+
+
+
+- Getting an "Unable to bind" error?
+
+
+Try opening up race.conf using nano:
+
+nano ~/.racecore/race.conf
+
+Add the following lines:
+
+listen=0
+rpcallowip=127.0.0.1
+
+Then restart the race daemon:
+
+race-cli stop
+raced
+
 
 Good luck!
