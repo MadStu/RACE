@@ -1,22 +1,9 @@
 #!/bin/bash
-NEWUSER="raceuser"
 
+echo "Please enter the password for your new user account when asked..."
+sleep 3
 sudo apt-get update -y
 sudo apt-get install -y pwgen
-NEWPASS=$(pwgen -1 14 -n)
-sleep 2
-echo "Creating a new user account with username: $NEWUSER."
-sleep 1
-echo "Please choose a strong password and write it down."
-sleep 1
-echo "I would suggest using this password: $NEWPASS"
-sleep 5
-adduser $NEWUSER
-usermod -aG sudo $NEWUSER
-su - $NEWUSER
-sleep 2
-echo "Please enter your password when asked for..."
-sleep 3
 sudo apt-get upgrade -y
 sudo apt-get dist-upgrade -y
 sudo apt-get install nano htop git -y
@@ -65,7 +52,7 @@ sleep 10
 ./venv/bin/pip install -r requirements.txt
 sleep 10
 crontab -l > mycron
-echo "* * * * * cd /home/$NEWUSER/sentinel && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1" >> mycron
+echo "* * * * * cd /home/raceuser/sentinel && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1" >> mycron
 crontab mycron
 rm mycron
 sleep 10
