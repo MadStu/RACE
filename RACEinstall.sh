@@ -43,7 +43,7 @@ echo -e "masternode=1\nmasternodeprivkey=$MKEY\n\n" >> /$HOME/.racecore/race.con
 sleep 10
 raced -daemon
 sleep 1
-sudo apt-get -y install python-virtualenv
+sudo apt-get -y install virtualenv python-virtualenv
 sleep 1
 git clone https://github.com/racecrypto/sentinel.git && cd sentinel
 sleep 1
@@ -101,4 +101,3 @@ echo "You'll also need your server IP which is:"
 echo "$EXIP"
 sleep 3
 echo "Good luck! You got this!!"
-rm ~/RACEinstall.sh
