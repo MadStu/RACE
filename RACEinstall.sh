@@ -33,7 +33,7 @@ sudo chmod -R 777 $HOME/.racecore
 RPCU=$(pwgen -1 4 -n)
 PASS=$(pwgen -1 14 -n)
 EXIP=$(curl ipinfo.io/ip)
-printf "rpcuser=rpc$RPCUuser\nrpcpassword=$PASS\nbind=$EXIP:8800\nexternalip=$EXIP:8800\ndaemon=1\n\naddnode=77.68.76.112\naddnode=104.238.146.103:8800\naddnode=144.217.73.112:8800\naddnode=178.62.68.57:58012\naddnode=18.219.24.113:43852\naddnode=185.50.24.206:43724\naddnode=199.247.1.129:8800\naddnode=207.148.13.195:8800\naddnode=207.246.112.32:8800\naddnode=45.32.125.221:8800\naddnode=45.77.24.41:8800\naddnode=91.121.90.78:8800\naddnode=101.132.172.55\naddnode=103.208.27.24\naddnode=103.69.195.185\naddnode=103.82.248.2\naddnode=104.168.52.134\naddnode=104.238.149.146\naddnode=107.191.36.247\naddnode=17.191.36.247\n\n" > /$HOME/.racecore/race.conf
+printf "rpcuser=rpc$RPCU\nrpcpassword=$PASS\nrpcport=8801\nrpcthreads=8\nrpcallowip=127.0.0.1\nbind=$EXIP:8800\nmaxconnections=128\ngen=0\nexternalip=$EXIP\ndaemon=1\n\naddnode=77.68.76.112\naddnode=104.238.146.103:8800\naddnode=144.217.73.112:8800\naddnode=178.62.68.57:58012\naddnode=18.219.24.113:43852\naddnode=185.50.24.206:43724\naddnode=199.247.1.129:8800\naddnode=207.148.13.195:8800\naddnode=207.246.112.32:8800\naddnode=45.32.125.221:8800\naddnode=45.77.24.41:8800\naddnode=91.121.90.78:8800\naddnode=101.132.172.55\naddnode=103.208.27.24\naddnode=103.69.195.185\naddnode=103.82.248.2\naddnode=104.168.52.134\naddnode=104.238.149.146\naddnode=107.191.36.247\naddnode=17.191.36.247\n\n" > /$HOME/.racecore/race.conf
 raced -daemon
 sleep 10
 MKEY=$(race-cli masternode genkey)
