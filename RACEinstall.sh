@@ -75,7 +75,7 @@ echo "   #11" >> $LOGFILE 2>&1
 #11
 sudo mkdir $HOME/tempRACE >> $LOGFILE 2>&1
 sudo chmod -R 777 $HOME/tempRACE >> $LOGFILE 2>&1
-sudo git clone https://github.com/racecrypto/racecoin $HOME/tempRACE >> $LOGFILE 2>&1
+sudo git clone https://github.com/RaceCurrencyOfficial/racecoin-core $HOME/tempRACE >> $LOGFILE 2>&1
 
 echo "Generating..."
 echo "   #12" >> $LOGFILE 2>&1
@@ -92,10 +92,13 @@ echo "   #13" >> $LOGFILE 2>&1
 sudo ./configure >> $LOGFILE 2>&1
 
 echo "Making..."
-echo "   #14" >> $LOGFILE 2>&1
+echo "   #14A  " >> $LOGFILE 2>&1
 
-#14
+#14A
 sudo chmod +x share/genbuild.sh >> $LOGFILE 2>&1
+echo "   #14B  " >> $LOGFILE 2>&1
+
+#14B
 sudo make >> $LOGFILE 2>&1
 
 echo "Installing..."
@@ -164,7 +167,7 @@ echo "Downloading Sentinel..."
 echo "   #23" >> $LOGFILE 2>&1
 
 #23
-git clone https://github.com/racecrypto/sentinel.git && cd sentinel >> $LOGFILE 2>&1
+git clone https://github.com/RaceCurrencyOfficial/sentinel.git && cd sentinel >> $LOGFILE 2>&1
 sleep 5
 
 echo "Installing Sentinel..."
@@ -181,7 +184,7 @@ echo "   #25" >> $LOGFILE 2>&1
 
 #25
 crontab -l > mycron
-echo "* * * * * cd /home/raceuser/sentinel && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1" >> mycron
+echo "* * * * * cd /home/$USER/sentinel && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1" >> mycron
 crontab mycron >> $LOGFILE 2>&1
 rm mycron >> $LOGFILE 2>&1
 sleep 10
