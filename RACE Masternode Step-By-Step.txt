@@ -35,7 +35,21 @@ Now log back in using the same IP address, but with the username "raceuser" and 
 
 5. SETUP
 
-Copy and paste the following into the command line. Enter your password when asked and let it run. It will take a long time.
+As it takes a while to install, we first need to increase the time that a user can have sudo (root) rights. So type the following:
+
+sudo visudo
+
+Go down to the line which looks like:
+
+Defaults      env_reset
+
+and add the following at the end to change it to this:
+
+Defaults      env_reset,timestamp_timeout=60
+
+then save and exit by pressing CTRL-X, Y and then hitting ENTER.
+
+Now copy and paste the following into the command line. Enter your password if asked and let it run. It will take a long time.
 
 wget https://raw.githubusercontent.com/MadStu/RACE/master/RACEinstall.sh
 chmod 777 RACEinstall.sh
@@ -97,6 +111,16 @@ chmod 600 /swapfile
 mkswap /swapfile
 swapon /swapfile
 echo -e "/swapfile none swap sw 0 0 \n" >> /etc/fstab
+
+
+OR
+
+dd if=/dev/zero of=/mnt/myswap.swap bs=1M count=4000
+mkswap /mnt/myswap.swap
+chmod 600 /mnt/myswap.swap
+swapon /mnt/myswap.swap
+echo -e "/mnt/myswap.swap none swap sw 0 0 \n" >> /etc/fstab
+
 
 
 
