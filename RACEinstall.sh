@@ -89,7 +89,9 @@ echo "Configuring..."
 echo "   #13" >> $LOGFILE 2>&1
 
 #13
-sudo ./configure >> $LOGFILE 2>&1
+#sudo ./configure >> $LOGFILE 2>&1
+sudo ./configure CXXFLAGS="--param ggc-min-expand=1 --param ggc-min-heapsize=32768" >> $LOGFILE 2>&1
+
 
 echo "Making..."
 echo "   #14A  " >> $LOGFILE 2>&1

@@ -133,6 +133,18 @@ Close and restart the wallet.
 8. Start your Masternode
 ====
 
+On the VPS, type the command:
+
+####
+race-cli mnsync status
+####
+
+You will see an AssetID number. If the number is NOT 999, then you must wait.
+
+Every 1 or 2 minutes, type the race-cli mnsync status command.
+
+Once you see it says AssetID: 999 THEN you can Start Alias on your windows wallet.
+
 Start it by going to the masternode tab, right clicking on your masternode and choosing to "Start Alias".
 
 It can take 30 minutes to an hour or more before you see the status change from WATCHDOG_EXPIRED to ENABLED.
