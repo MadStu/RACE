@@ -172,11 +172,10 @@ Try opening up race.conf using nano:
 nano ~/.racecore/race.conf
 ```
 
-Add the following lines:
+Add the following line:
 
 ```
 listen=0
-rpcallowip=127.0.0.1
 ```
 
 Then restart the race daemon:
