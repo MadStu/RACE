@@ -93,7 +93,7 @@ echo "   #13" >> $LOGFILE 2>&1
 sudo ./configure CXXFLAGS="--param ggc-min-expand=1 --param ggc-min-heapsize=32768" >> $LOGFILE 2>&1
 
 
-echo "Making..."
+echo "Now Making. This will take a VERY long time..."
 echo "   #14A  " >> $LOGFILE 2>&1
 
 #14A
