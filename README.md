@@ -153,6 +153,12 @@ sed -i -e 's/\r$//' fixsentinel.sh
 ./fixsentinel.sh
 ```
 
+Use this command again and wait until it returns AssetID: 999
+
+```
+race-cli mnsync status
+```
+
 Now Start Alias again in the windows wallet and wait another hour or so for the status to change. 
 
 
