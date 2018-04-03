@@ -142,7 +142,7 @@ It can take 30 minutes to an hour or more before you see the status change from 
 
 
 
-## 9. Fix WATHCDOG_EXPIRED
+## 9. Fix WATCHDOG_EXPIRED
 
 If after a couple of hours your masternode status hasn't changed to ENABLED, run the following command:
 
