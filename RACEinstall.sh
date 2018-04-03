@@ -90,10 +90,10 @@ echo "   #13" >> $LOGFILE 2>&1
 
 #13
 #sudo ./configure >> $LOGFILE 2>&1
-sudo ./configure CXXFLAGS="--param ggc-min-expand=1 --param ggc-min-heapsize=32768" >> $LOGFILE 2>&1
+sudo ./configure --without-gui CXXFLAGS="--param ggc-min-expand=1 --param ggc-min-heapsize=32768" >> $LOGFILE 2>&1
 
 
-echo "Now Making. This will take a VERY long time..."
+echo "Now Making. This will take a VERY long time. Leave it running, don't close your SSH session..."
 echo "   #14A  " >> $LOGFILE 2>&1
 
 #14A
