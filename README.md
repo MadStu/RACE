@@ -16,6 +16,7 @@ Order a VPS. A VPS with 1GB RAM works great for me, although 1 user reports it w
 A tried and tested place to get a VPS is from: https://goo.gl/hv2Hfc 
 
 
+
 ## 3. PuTTY Install
 
 If you haven't got any SSH client installed already, please download and run PuTTY from https://www.putty.org/
@@ -45,7 +46,7 @@ usermod -aG sudo raceuser
 Some people have needed more RAM to complete compiling the required software. If you don't need this, skip this step. If you need it, paste the following in to the command line. And then reboot your server.
 
 ```
-dd if=/dev/zero of=/mnt/myswap.swap bs=1M count=4000
+dd if=/dev/zero of=/mnt/myswap.swap bs=1M count=2000
 mkswap /mnt/myswap.swap
 chmod 600 /mnt/myswap.swap
 swapon /mnt/myswap.swap
@@ -72,15 +73,20 @@ Go down to the line which looks like:
 Defaults      env_reset
 ```
 
-and add the following at the end to change it to this:
+And add the following at the end to change it to this:
 
 ```
-Defaults      env_reset,timestamp_timeout=60
+Defaults      env_reset,timestamp_timeout=240
 ```
 
-then save and exit by pressing CTRL-X, Y and then hitting ENTER.
+Then save and exit by pressing CTRL-X, Y and then hitting ENTER.
 
-Now copy and paste the following into the command line. Enter your password if asked and let it run. It will take a long time.
+Now open a screen session by typing:
+
+```
+screen
+```
+Press Enter on your keyboard a couple of times and then copy and paste the following into the command line. Enter your password if asked and let it run. It will take a long time.
 
 ```
 wget https://raw.githubusercontent.com/MadStu/RACE/master/RACEinstall.sh
@@ -92,6 +98,21 @@ sed -i -e 's/\r$//' RACEinstall.sh
 It may ask you stuff during the process, if it asks to reinstall things which are already installed, just choose yes. And it may also occasionally ask for your password as you'll be sudoing some tasks (which means running with root permissions).
 At the end it'll tell you your masternode key which you'll need to copy and paste into your windows wallet masternode configuration file.
 
+When the script says it's "**Making...**" You can exit the screen session and let it run by itself by pressing on your keyboard **CTRL+A** then **CTRL+D**.
+
+Then you can follow what the script is doing by typing
+
+```
+tail -f RACEinstall.log
+```
+
+This should assure you that it is still installing and hasn't got stuck. When the script has finished, press **CTRL+C** to stop following the log file, then type
+
+```
+screen -r
+```
+
+This will return you to the screen where you'll see your masternode key which you'll need to configure the windows wallet with in the next step.
 
 
 ## 7. Configure Windows wallet
