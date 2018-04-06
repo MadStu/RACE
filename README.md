@@ -79,7 +79,7 @@ And add the following at the end to change it to this:
 Defaults      env_reset,timestamp_timeout=240
 ```
 
-Then save and exit by pressing CTRL-X, Y and then hitting ENTER.
+Then save and exit by pressing **CTRL-X**, **Y** and then hitting ENTER.
 
 Now open a screen session by typing:
 
@@ -100,7 +100,7 @@ At the end it'll tell you your masternode key which you'll need to copy and past
 
 When the script says it's "**Making...**" You can exit the screen session and let it run by itself by pressing on your keyboard **CTRL+A** then **CTRL+D**.
 
-Then you can follow what the script is doing by typing
+It will take around **1 hour 30 minutes** to complete! You can follow what the script is doing by typing
 
 ```
 tail -f RACEinstall.log
