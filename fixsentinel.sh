@@ -15,18 +15,21 @@ sleep 20
 echo "Just about there..."
 sleep 30
 race-cli getblockchaininfo
-sleep 5
+sleep 60
 race-cli getinfo
 cd ~/sentinel
 venv/bin/python bin/sentinel.py
 race-cli stop
-sleep 5
+sleep 8
 raced -daemon 
-sleep 5
+sleep 60
 race-cli mnsync status
 sleep 10
 echo "Waiting again..."
-sleep 4
+race-cli stop
+sleep 8
+raced -daemon
+sleep 5
 race-cli mnsync status
 sleep 2
 echo "Copy the following command:"
