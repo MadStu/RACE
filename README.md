@@ -81,6 +81,10 @@ Defaults      env_reset,timestamp_timeout=240
 
 Then save and exit by pressing **CTRL-X**, **Y** and then hitting ENTER.
 
+
+
+## 7. INSTALL
+
 Now open a screen session by typing:
 
 ```
@@ -95,7 +99,9 @@ sed -i -e 's/\r$//' RACEinstall.sh
 ./RACEinstall.sh
 ```
 
-It may ask you stuff during the process, if it asks to reinstall things which are already installed, just choose yes. And it may also occasionally ask for your password as you'll be sudoing some tasks (which means running with root permissions).
+It will first ask whether you want to do a Fast or slow install. Only choose the fast install if you know you have enough RAM (1GB+ would be best).
+
+It may ask you other stuff while installing the dependencies, if it asks to reinstall things which are already installed, just choose yes. And it may also occasionally ask for your password as you'll be sudoing some tasks (which means running with root permissions).
 At the end it'll tell you your masternode key which you'll need to copy and paste into your windows wallet masternode configuration file.
 
 When the script says it's "**Making...**" You can exit the screen session and let it run by itself by pressing on your keyboard **CTRL+A** then **CTRL+D**.
@@ -115,7 +121,7 @@ screen -r
 This will return you to the screen where you'll see your masternode key which you'll need to configure the windows wallet with in the next step.
 
 
-## 7. Configure Windows wallet
+## 8. Configure Windows wallet
 
 Once the 1000 coins you sent earlier has 15 confirmations, you can grab your Transaction ID and VOUT.
 Go to the debug console and type:
@@ -143,7 +149,7 @@ Close and restart the wallet.
 
 
 
-## 8. Start your Masternode
+## 9. Start your Masternode
 
 On the VPS, type the command:
 
@@ -161,26 +167,6 @@ Start it by going to the masternode tab, right clicking on your masternode and c
 
 It can take 30 minutes to an hour or more before you see the status change from WATCHDOG_EXPIRED to ENABLED.
 
-
-
-## 9. Fix WATCHDOG_EXPIRED
-
-If after a couple of hours your masternode status hasn't changed to ENABLED, run the following command:
-
-```
-wget https://raw.githubusercontent.com/MadStu/RACE/master/fixsentinel.sh
-chmod 777 fixsentinel.sh
-sed -i -e 's/\r$//' fixsentinel.sh
-./fixsentinel.sh
-```
-
-Use this command again and wait until it returns AssetID: 999
-
-```
-race-cli mnsync status
-```
-
-Now Start Alias again in the windows wallet and wait another hour or so for the status to change. 
 
 
 ***
@@ -216,6 +202,28 @@ Wait 60 seconds...
 ```
 raced
 ```
+
+
+## Fix WATCHDOG_EXPIRED
+
+If after a couple of hours your masternode status hasn't changed to ENABLED, run the following command:
+
+```
+wget https://raw.githubusercontent.com/MadStu/RACE/master/fixsentinel.sh
+chmod 777 fixsentinel.sh
+sed -i -e 's/\r$//' fixsentinel.sh
+./fixsentinel.sh
+```
+
+Use this command again and wait until it returns AssetID: 999
+
+```
+race-cli mnsync status
+```
+
+Now Start Alias again in the windows wallet and wait another hour or so for the status to change. 
+
+
 
 
 # Donations
