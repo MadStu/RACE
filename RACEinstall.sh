@@ -288,6 +288,16 @@ sleep 3
 echo "You'll also need your server IP which is:"
 echo "$EXIP"
 echo " "
+echo "=================================="
+echo " "
+sleep 2
+echo "So your masternode.conf should start with:"
+echo " "
+THISHOST=$(hostname -f)
+echo "$THISHOST $EXIP:10000 $MKEY TXID VOUT"
+echo " "
+echo "=================================="
+echo " "
 sleep 3
 race-cli mnsync status >> $LOGFILE 2>&1
 echo "Good luck! You got this!!"
