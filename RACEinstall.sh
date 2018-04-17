@@ -2,12 +2,43 @@
 
 clear
 echo " "
-echo "Install of the RACE Daemon is about to begin..."
+echo "==============================="
+echo "==                           =="
+echo "==  MadStu's Install Script  =="
+echo "==      Compiling Race       =="
+echo "==                           =="
+echo "==============================="
+echo " "
+if [ -e RACEinstall.log ]
+then
+	echo "The script may be running already or it's already been run."
+	echo "Please delete or rename RACEinstall.log if you wish to run script again."
+	echo " "
+	echo "If you've already run this script and it failed to complete, please contact MadStu on the Race Discord server with the log file so he can see what the problem is."
+else
+echo " "
+echo "Please pick an install speed"
+echo "Slow should work on all systems but takes a lot longer"
+echo " "
+select CONFIGOPTION in Fast Slow
+do
+	case $CONFIGOPTION in
+	Fast|Slow)
+		break
+		;;
+	*)
+		echo "Invalid Selection"
+		;;
+	esac
+done
+echo "You have selected $CONFIGOPTION mode"
+echo " "
+echo "The script will begin 5 seconds..."
 sleep 1
 echo " "
-echo "You may be asked for your password a few times during the install..."
+echo "You may be asked for your password during the install..."
 echo " "
-sleep 1
+sleep 5
 
 LOGFILE=/$HOME/RACEinstall.log
 echo "Updating..."
@@ -38,7 +69,7 @@ echo "..."
 echo "   #05" >> $LOGFILE 2>&1
 
 #05
-sudo apt-get install build-essential libtool autotools-dev pwgen automake pkg-config libssl-dev libevent-dev bsdmainutils software-properties-common libgmp3-dev -y >> $LOGFILE 2>&1
+sudo apt-get install build-essential jq libtool autotools-dev pwgen automake pkg-config libssl-dev libevent-dev bsdmainutils software-properties-common libgmp3-dev -y >> $LOGFILE 2>&1
 echo "Still Installing..."
 echo "   #06" >> $LOGFILE 2>&1
 
@@ -89,18 +120,26 @@ echo "Configuring..."
 echo "   #13" >> $LOGFILE 2>&1
 
 #13
-#sudo ./configure >> $LOGFILE 2>&1
-sudo ./configure --without-gui CXXFLAGS="--param ggc-min-expand=1 --param ggc-min-heapsize=32768" >> $LOGFILE 2>&1
+if [ $CONFIGOPTION == "Fast" ]
+then
+	sudo ./configure --without-gui >> $LOGFILE 2>&1
+	echo "Now Making. This may take around 30 minutes. Leave it running, don't close your SSH session..."
+	echo " "
+else
+	sudo ./configure --without-gui CXXFLAGS="--param ggc-min-expand=1 --param ggc-min-heapsize=32768" >> $LOGFILE 2>&1
+	echo "Now Making. This may take up to 2 hours. Leave it running, don't close your SSH session..."
+	echo " "
+fi
 
+echo "If you're running in a 'screen' press CTRL+A CTRL+D to leave the script running."
+echo " "
+echo "You can then return to this screen later to check progress by typing:"
+echo "screen -r"
+echo " "
+echo "   #14  " >> $LOGFILE 2>&1
 
-echo "Now Making. This will take a VERY long time. Leave it running, don't close your SSH session..."
-echo "   #14A  " >> $LOGFILE 2>&1
-
-#14A
+#14
 sudo chmod +x share/genbuild.sh >> $LOGFILE 2>&1
-echo "   #14B  " >> $LOGFILE 2>&1
-
-#14B
 sudo make >> $LOGFILE 2>&1
 
 echo "Installing..."
@@ -136,11 +175,11 @@ echo "   #18" >> $LOGFILE 2>&1
 #18
 raced -daemon >> $LOGFILE 2>&1
 sleep 2
-echo "Running for 60 seconds then stopping..."
+echo "Running for 30 seconds then stopping..."
 echo "   #19" >> $LOGFILE 2>&1
 
 #19
-sleep 60
+sleep 30
 MKEY=$(race-cli masternode genkey) >> $LOGFILE 2>&1
 race-cli stop >> $LOGFILE 2>&1
 
@@ -209,71 +248,48 @@ sleep 1
 race-cli stop >> $LOGFILE 2>&1
 
 echo "Reindexing blockchain..."
+
+
+
+
+
+
+wget https://raw.githubusercontent.com/MadStu/RACE/master/fixsentinel.sh
+chmod 777 fixsentinel.sh
+sed -i -e 's/\r$//' fixsentinel.sh
+./fixsentinel.sh
+
+
+
+
 echo "   #28" >> $LOGFILE 2>&1
 
 #28
 sleep 1
-cd ~/.racecore >> $LOGFILE 2>&1
-rm mncache.dat >> $LOGFILE 2>&1
-rm mnpayments.dat >> $LOGFILE 2>&1
-raced -daemon -reindex >> $LOGFILE 2>&1
-sleep 2
-echo "Waiting for reindex to complete..."
-sleep 10
-echo "Keep waiting..."
-sleep 20
-echo "Just about there..."
-sleep 30
-race-cli getblockchaininfo >> $LOGFILE 2>&1
-sleep 5
 
-echo "Getting info..."
-echo "   #29" >> $LOGFILE 2>&1
 
-#29
-race-cli getinfo >> $LOGFILE 2>&1
-race-cli getinfo >> $LOGFILE 2>&1
-cd ~/sentinel >> $LOGFILE 2>&1
-venv/bin/python bin/sentinel.py >> $LOGFILE 2>&1
 
-echo "Restarting RACE daemon..."
-echo "   #30" >> $LOGFILE 2>&1
-
-#30
-race-cli stop >> $LOGFILE 2>&1
-sleep 60
-raced -daemon  >> $LOGFILE 2>&1
-sleep 5
-
-echo "Masternode sync status..."
-echo "   #31" >> $LOGFILE 2>&1
-
-#31
-race-cli mnsync status >> $LOGFILE 2>&1
-sleep 1
-race-cli mnsync status
-sleep 10
-echo "Waiting again..."
-sleep 4
 
 echo "Deleting temp folder..."
 echo "   #32" >> $LOGFILE 2>&1
 
 #32
 sudo rm -rf $HOME/tempRACE >> $LOGFILE 2>&1
-race-cli mnsync status >> $LOGFILE 2>&1
 sleep 3 
-echo "Keep checking the masternode sync status by typing: race-cli mnsync status"
-sleep 3
-echo "When you see AssetID: 999 then you can Start Alias on your windows wallet..."
-sleep 3
+echo " "
+echo " "
 echo "Now would be a good time to setup your Transaction ID and VOUT from your windows wallet"
+echo " "
 sleep 3
 echo "You'll need the Masternode Key which is:"
 echo "$MKEY"
+echo " "
 sleep 3
 echo "You'll also need your server IP which is:"
 echo "$EXIP"
+echo " "
 sleep 3
+race-cli mnsync status >> $LOGFILE 2>&1
 echo "Good luck! You got this!!"
+rm fixsentinel.sh
 echo " --END--" >> $LOGFILE 2>&1
