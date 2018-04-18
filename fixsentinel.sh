@@ -39,7 +39,7 @@ while [ "$menu" != 1 ]; do
 			echo "  Blocks required: $BLOCKCOUNT"
 			echo "    Blocks so far: $WALLETBLOCKS"
 			sleep 60
-			BLOCKCOUNT=$(curl https://explorer.01coin.io/api/getblockcount)
+			BLOCKCOUNT=$(curl http://explorer.racecurrency.com/api/getblockcount)
 			ARRAY=$(race-cli getinfo)
 			echo "$ARRAY" > getinfo.json
 			WALLETBLOCKS=$(jq '.blocks' getinfo.json)
