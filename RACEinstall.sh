@@ -294,7 +294,7 @@ sleep 2
 echo "So your masternode.conf should start with:"
 echo " "
 THISHOST=$(hostname -f)
-echo "$THISHOST $EXIP:10000 $MKEY TXID VOUT"
+echo "$THISHOST $EXIP:8800 $MKEY TXID VOUT"
 echo " "
 echo "=================================="
 echo " "
