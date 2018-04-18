@@ -33,7 +33,7 @@ do
 done
 echo "You have selected $CONFIGOPTION mode"
 echo " "
-echo "The script will begin 5 seconds..."
+echo "The script will begin in 5 seconds..."
 sleep 1
 echo " "
 echo "You may be asked for your password during the install..."
