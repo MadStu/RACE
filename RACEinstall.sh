@@ -303,3 +303,4 @@ race-cli mnsync status >> $LOGFILE 2>&1
 echo "Good luck! You got this!!"
 rm fixsentinel.sh
 echo " --END--" >> $LOGFILE 2>&1
+fi
