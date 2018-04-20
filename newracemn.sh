@@ -124,6 +124,10 @@ while [ "$menu" != 1 ]; do
 			echo " "
 			echo "  - Holding CTRL + C will exit this script and the block"
 			echo "    sync will then continue in the background."
+			echo " "
+			echo "  - If you exit this script early, you'll need to grab the"
+			echo "    masternode genkey yourself from the race.conf file."
+			echo " "
 			sleep 20
 			BLOCKCOUNT=$(curl http://explorer.racecurrency.com/api/getblockcount)
 			ARRAY=$(~/racecoin/race-cli getinfo)
@@ -169,6 +173,10 @@ while [ "$meanu" != 1 ]; do
 			echo " "
 			echo "  - Holding CTRL + C will exit this script and the"
 			echo "    block sync will then continue in the background."
+			echo " "
+			echo "  - If you exit this script early, you'll need to grab the"
+			echo "    masternode genkey yourself from the race.conf file."
+			echo " "
 			sleep 5
 			MNSYNC=$(~/racecoin/race-cli mnsync status)
 			echo "$MNSYNC" > mnracesync.json
