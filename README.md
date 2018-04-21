@@ -148,13 +148,13 @@ listen=0
 Then restart the race daemon:
 
 ```
-race-cli stop
+~/racecoin/race-cli stop
 ```
 
 Wait 60 seconds...
 
 ```
-raced
+~/racecoin/raced -daemon
 ```
 
 
@@ -172,7 +172,7 @@ sed -i -e 's/\r$//' fixsentinel.sh
 Use this command again and wait until it returns AssetID: 999
 
 ```
-race-cli mnsync status
+~/racecoin/race-cli mnsync status
 ```
 
 Now Start Alias again in the windows wallet and wait another hour or so for the status to change. 
