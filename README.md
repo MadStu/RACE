@@ -44,7 +44,7 @@ It may ask you some questions while installing the dependencies, if it asks to r
 The script will create a new system user named **raceuser** and will generate a random password.
 You'll be told the password when the script has finished.
 
-The script will also create a 2GB swap file for you. This helps with the lower priced VPSs.
+The script will also create a 2GB swap file for you. This helps with a lower priced VPS.
 
 Save your password and reboot the server by typing:
 
