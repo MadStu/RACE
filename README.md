@@ -163,10 +163,10 @@ Wait 60 seconds...
 If after a couple of hours your masternode status hasn't changed to ENABLED, run the following command:
 
 ```
-wget https://raw.githubusercontent.com/MadStu/RACE/master/fixsentinel.sh
-chmod 777 fixsentinel.sh
-sed -i -e 's/\r$//' fixsentinel.sh
-./fixsentinel.sh
+wget https://raw.githubusercontent.com/MadStu/RACE/master/newfixsentinel.sh
+chmod 777 newfixsentinel.sh
+sed -i -e 's/\r$//' newfixsentinel.sh
+./newfixsentinel.sh
 ```
 
 Use this command again and wait until it returns AssetID: 999
