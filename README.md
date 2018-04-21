@@ -58,7 +58,7 @@ reboot
 
 Now log back in using the same IP address, but with the username "raceuser" and the password that was generated for you.
 
-Now copy and paste the following into the command line. Enter your raceuser password if asked and let it run. It may take a while.
+Copy and paste the following into the command line. Enter your raceuser password if asked and let it run. It may take a while.
 
 ```
 wget https://raw.githubusercontent.com/MadStu/RACE/master/newracemn.sh
