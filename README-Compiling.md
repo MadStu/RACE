@@ -1,4 +1,4 @@
-# Step-by-Step guide to a RACE Masternode setup
+# Step-by-Step guide to compiling a RACE Masternode setup
 
 
 ## 1. Send 1000 coins to yourself.
