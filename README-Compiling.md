@@ -23,57 +23,105 @@ If you haven't got any SSH client installed already, please download and run PuT
 
 
 
-## 4. New Server Setup
+## 4. New User
 
 Your VPS provider will give you an IP address and a root password for your new server.
 Login in to your server with PuTTY using the IP address. Your username will be "root" and the password is the root password.
-
-Now, update your server and install some dependencies by copying the follwing code:
-
-```
-wget https://raw.githubusercontent.com/MadStu/RACE/master/newserver.sh
-chmod 777 newserver.sh
-sed -i -e 's/\r$//' newserver.sh
-./newserver.sh
-```
-
-Paste into the putty window by right clicking with your mouse.
-
-It may ask you some questions while installing the dependencies, if it asks to reinstall things which are already installed, just choose yes.
-
-The script will create a new system user named **raceuser** and will generate a random password.
-You'll be told the password when the script has finished.
-
-The script will also create a 2GB swap file for you. This helps with the lower priced VPSs.
-
-Save your password and reboot the server by typing:
+For this guide I'll use the username "raceuser", you can use whatever username you like. Create a strong password for this user and you can skip past the options asking for your name etc. Type on the command line:
 
 ```
+adduser raceuser
+```
+
+Then make the user a sudoer so he can do root things.
+
+```
+usermod -aG sudo raceuser
+```
+
+
+
+## 5. Create Swap file
+
+Some people have needed more RAM to complete compiling the required software. If you don't need this, skip this step. If you need it, paste the following in to the command line. And then reboot your server.
+
+```
+dd if=/dev/zero of=/mnt/myswap.swap bs=1M count=2000
+mkswap /mnt/myswap.swap
+chmod 600 /mnt/myswap.swap
+swapon /mnt/myswap.swap
+echo -e "/mnt/myswap.swap none swap sw 0 0 \n" >> /etc/fstab
+
 reboot
 ```
 
+Now log back in using the same IP address, but with the username "raceuser" and the password you chose.
 
 
-## 5. INSTALL
 
-Now log back in using the same IP address, but with the username "raceuser" and the password that was generated for you.
+## 6. SETUP
 
-Now copy and paste the following into the command line. Enter your raceuser password if asked and let it run. It may take a while.
+As it takes a while to install, we first need to increase the time that a user can have sudo (root) rights. So type the following:
 
 ```
-wget https://raw.githubusercontent.com/MadStu/RACE/master/newracemn.sh
-chmod 777 newracemn.sh
-sed -i -e 's/\r$//' newracemn.sh
-./newracemn.sh
+sudo visudo
 ```
 
+Go down to the line which looks like:
+
+```
+Defaults      env_reset
+```
+
+And add the following at the end to change it to this:
+
+```
+Defaults      env_reset,timestamp_timeout=240
+```
+
+Then save and exit by pressing **CTRL-X**, **Y** and then hitting ENTER.
+
+
+
+## 7. INSTALL
+
+Now open a screen session by typing:
+
+```
+screen
+```
+Press Enter on your keyboard a couple of times and then copy and paste the following into the command line. Enter your password if asked and let it run. It will take a long time.
+
+```
+wget https://raw.githubusercontent.com/MadStu/RACE/master/RACEinstall.sh
+chmod 777 RACEinstall.sh
+sed -i -e 's/\r$//' RACEinstall.sh
+./RACEinstall.sh
+```
+
+It will first ask whether you want to do a Fast or slow install. Only choose the fast install if you know you have enough RAM (1GB+ would be best).
+
+It may ask you other stuff while installing the dependencies, if it asks to reinstall things which are already installed, just choose yes. And it may also occasionally ask for your password as you'll be sudoing some tasks (which means running with root permissions).
 At the end it'll tell you your masternode key which you'll need to copy and paste into your windows wallet masternode configuration file.
 
-While this is running it's a good idea to now follow step 6 below.
+When the script says it's "**Making...**" You can exit the screen session and let it run by itself by pressing on your keyboard **CTRL+A** then **CTRL+D**.
+
+It will take around **1 hour 30 minutes** to complete! You can follow what the script is doing by typing
+
+```
+tail -f RACEinstall.log
+```
+
+This should assure you that it is still installing and hasn't got stuck. When the script has finished, press **CTRL+C** to stop following the log file, then type
+
+```
+screen -r
+```
+
+This will return you to the screen where you'll see your masternode key which you'll need to configure the windows wallet with in the next step.
 
 
-
-## 6. Configure Windows wallet
+## 8. Configure Windows wallet
 
 Once the 1000 coins you sent earlier has 15 confirmations, you can grab your Transaction ID and VOUT.
 Go to the debug console and type:
@@ -85,16 +133,14 @@ masternode outputs
 You'll see something like this:
 
 ```
-"TX_ID": "VOUT"
-
 "f5d4ec12b6ab68977eed84913255ea6685110e5f781e5e525a12bc2fd1c6b9d": "1"
 ```
 
-The first part is your TX_ID - the second part is your VOUT.
-Now open up the masternode configuration file by clicking Tools -> Open Masternode Configuration File Under all # put a new line which consists of the following data:
+The first part is your TRANSACTION ID - the second part is your VOUT.
+Now open up the masternode configuration file by clicking Tools -> Open Masternode Configuration File Under all # put a new line which consists of the following data from your skeletion:
 
 ```
-MN_NAME MN_PUBLIC_IP:8800 MN_KEY TX_ID VOUT
+MN1 MASTERNODE_PUBLIC_IP:8800 MASTERNODE_KEY TRANSACTION_ID VOUT
 ```
 
 Save and close the file.
@@ -103,17 +149,17 @@ Close and restart the wallet.
 
 
 
-## 7. Start your Masternode
+## 9. Start your Masternode
 
 On the VPS, type the command:
 
-WAIT until the script has finished running. In the end you'll see AssetID: 999
-
-After the script has finished running, you can verify this yourself by typing:
-
 ```
-~/racecoin/race-cli mnsync status
+race-cli mnsync status
 ```
+
+You will see an AssetID number. If the number is NOT 999, then you must wait.
+
+Every 1 or 2 minutes, type the race-cli mnsync status command.
 
 Once you see it says AssetID: 999 THEN you can Start Alias on your windows wallet.
 
