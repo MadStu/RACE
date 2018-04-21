@@ -1,12 +1,15 @@
 # Step-by-Step guide to a RACE Masternode setup
+A novices guide to an Ubuntu 16.04 install
 
+***
 
 ## 1. Send 1000 coins to yourself.
 
 If you haven't done so already, install the windows wallet from https://github.com/racecryptocoin/racecoin/releases 
-Create a new receive address and call it something like MN1.
+Create a new receive address and call it something like MN1. A novices guide to an Ubuntu 16.04 install
+
 Then send 1000 Race coins to the address you just created. Make sure the address receives EXACTLY 1000 coins, so DO NOT tick the "Subtract fee from amount" option.
-We now need to wait for 15 confirmations of the transaction so we'll get on with the remote VPS install.
+We now need to **wait** for 15 confirmations of the transaction so we'll get on with the remote VPS install.
 
 
 
@@ -105,8 +108,6 @@ Close and restart the wallet.
 
 
 ## 7. Start your Masternode
-
-On the VPS, type the command:
 
 WAIT until the script has finished running. In the end you'll see AssetID: 999
 
