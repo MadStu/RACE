@@ -91,7 +91,8 @@ You'll see something like this:
 ```
 
 The first part is your TX_ID - the second part is your VOUT.
-Now open up the masternode configuration file by clicking Tools -> Open Masternode Configuration File Under all # put a new line which consists of the following data:
+Now open up the masternode configuration file by clicking Tools -> Open Masternode Configuration File. 
+Under all #'s put a new line which consists of the following data:
 
 ```
 MN_NAME MN_PUBLIC_IP:8800 MN_KEY TX_ID VOUT
