@@ -1,3 +1,4 @@
+#!/bin/bash
 clear
 sleep 1
 if [ -e getraceinfo.json ]
@@ -30,7 +31,7 @@ printf "rpcuser=rpc$RPCU\nrpcpassword=$PASS\nrpcport=8801\nrpcthreads=8\nrpcallo
 sleep 10
 MKEY=$(~/racecoin/race-cli masternode genkey)
 ~/racecoin/race-cli stop
-echo -e "masternode=1\nmasternodeprivkey=$MKEY\n\n" >> ~/.racecore/race.conf
+printf "masternode=1\nmasternodeprivkey=$MKEY\n\n" >> ~/.racecore/race.conf
 sleep 10
 ~/racecoin/raced -daemon
 
