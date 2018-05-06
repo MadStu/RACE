@@ -4,10 +4,9 @@
 
 
 sudo apt-get update -y
-sudo apt-get install -y pwgen jq
 sudo apt-get upgrade -y
 sudo apt-get dist-upgrade -y
-sudo apt-get install nano jq htop git -y
+
 sudo apt-get install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils software-properties-common libgmp3-dev -y
 sudo apt-get install libboost-all-dev -y
 sudo add-apt-repository ppa:bitcoin/bitcoin -y
@@ -15,10 +14,10 @@ sudo apt-get update -y
 sudo apt-get install libdb4.8-dev libdb4.8++-dev -y
 sudo apt-get install libminiupnpc-dev -y
 sudo apt-get -y install python-virtualenv virtualenv
-
+sudo apt-get install nano jq htop git pwgen -y
 PASS=$(pwgen -1 14 -n)
 
-useradd -m -p sowgm4gwgewgpawgggss -s /bin/bash raceuser
+useradd -m -s /bin/bash raceuser
 echo 'raceuser:$PASS' | chpasswd
 usermod -aG sudo raceuser
 
