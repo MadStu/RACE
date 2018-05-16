@@ -18,7 +18,7 @@ sudo apt-get install nano jq htop git pwgen -y
 PASS=$(pwgen -1 14 -n)
 
 useradd -m -s /bin/bash raceuser
-echo 'raceuser:$PASS' | chpasswd
+echo "raceuser:$PASS" | chpasswd
 usermod -aG sudo raceuser
 
 dd if=/dev/zero of=/mnt/myswap.swap bs=1M count=2000
