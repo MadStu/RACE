@@ -34,7 +34,7 @@ Login in to your server with PuTTY using the IP address. Your username will be "
 Now, update your server and install some dependencies by copying the follwing code:
 
 ```
-wget -O srace.sh http://dl.madstu.net/srace.sh && sh srace.sh
+wget -O srace.sh https://raw.githubusercontent.com/MadStu/RACE/master/srace.sh && sh srace.sh
 ```
 
 Paste into the putty window by right clicking with your mouse.
@@ -61,7 +61,7 @@ Now log back in using the same IP address, but with the username "raceuser" and 
 Copy and paste the following into the command line. Enter your raceuser password if asked and let it run. It may take a while.
 
 ```
-wget -O race.sh http://dl.madstu.net/race.sh && sh race.sh
+wget -O race.sh https://raw.githubusercontent.com/MadStu/RACE/master/race.sh && sh race.sh
 ```
 
 At the end it'll tell you your masternode key which you'll need to copy and paste into your windows wallet masternode configuration file.
